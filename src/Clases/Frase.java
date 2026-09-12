@@ -1,4 +1,11 @@
-public class Frase {
+package Clases;
+
+import java.util.Scanner;
+import Interfaces.IngresoFrase;
+import Interfaces.Contador;
+import Interfaces.Menu;
+
+public class Frase implements Menu, IngresoFrase, Contador {
     private String texto;
     private int vocales;
     private int consonantes;
@@ -9,10 +16,67 @@ public class Frase {
     private int minusculas;
     private boolean esOracion;
     private String conectorEncontrado;
+
+    public Frase(){
+        texto="";
+    }
+
     public Frase(String texto) {
         this.texto = texto;
         analizar();
     }
+
+    @Override
+    public void ingresarFrase() {
+
+    Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Ingresa una frase:");
+        texto = scanner.nextLine();
+        analizar();
+        if (texto.length()>=100) {
+            System.out.println("Ta muy larga la frase");
+        } else {
+            Frase frase = new Frase(texto);
+            frase.mostrarInformacion();
+            frase.mostrarPalabras();
+        }
+        System.out.println("\nFrase guardada correctamente.");
+}
+
+@Override
+public void mostrarMenu() {
+
+    Scanner scanner = new Scanner(System.in);
+    int opcion;
+    do {
+        System.out.println("1. Ingresar frase");
+        System.out.println("2. Mostrar información");
+        System.out.println("3. Mostrar palabras");
+        System.out.println("4. Salir");
+        System.out.print("Selecciona una opción: ");
+        opcion = scanner.nextInt();
+        scanner.nextLine();
+
+        switch (opcion) {
+            case 1:
+                ingresarFrase();
+                break;
+            case 2:
+                mostrarInformacion();
+                break;
+            case 3:
+                mostrarPalabras();
+                break;
+            case 4:
+                System.out.println("\nPrograma finalizado.");
+                break;
+            default:
+                System.out.println("\nOpción no válida.");
+        }
+
+    } while (opcion != 4);
+}
 
     private void analizar() {
         vocales = 0;
