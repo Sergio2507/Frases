@@ -1,9 +1,10 @@
-package Clases;
+package Objetos;
 
 import Clases.AnalisisClase;
 import Clases.IngresoClase;
 import Clases.MenuClase;
 import Clases.PalabrasClase;
+import Clases.HistorialClase;
 
 import java.util.Scanner;
 
@@ -14,6 +15,7 @@ public class Frase {
     private IngresoClase ingreso;
     private AnalisisClase analisis;
     private PalabrasClase palabras;
+    private HistorialClase historial;
 
     public Frase() {
         texto = "";
@@ -21,6 +23,7 @@ public class Frase {
         ingreso = new IngresoClase();
         analisis = new AnalisisClase();
         palabras = new PalabrasClase();
+        historial = new HistorialClase();
     }
 
     public void ejecutar() {
@@ -33,38 +36,36 @@ public class Frase {
             switch (opcion) {
                 case 1:
                     texto = ingreso.ingresarFrase();
-                    System.out.println(
-                            "\nFrase guardada correctamente."
-                    );
+                    historial.agregarFrase(texto);
+                    System.out.println("\nFrase guardada correctamente.");
                     break;
                 case 2:
                     if (texto.trim().isEmpty()) {
-                        System.out.println(
-                                "\nPrimero debes ingresar una frase."
-                        );
+                        System.out.println("\nPrimero debes ingresar una frase.");
                     } else {
                         analisis.mostrarInformacion(texto);
                     }
                     break;
                 case 3:
                     if (texto.trim().isEmpty()) {
-                        System.out.println(
-                                "\nPrimero debes ingresar una frase."
-                        );
+                        System.out.println("\nPrimero debes ingresar una frase.");
                     } else {
                         palabras.mostrarPalabra(texto);
                     }
                     break;
                 case 4:
-                    System.out.println(
-                            "\nPrograma finalizado."
-                    );
+                    if (texto.trim().isEmpty()) {
+                        System.out.println("\nPrimero debes ingresar una frase.");
+                    } else {
+                        historial.mostrarHistorial();
+                    }
+                    break;
+                case 5:
+                    System.out.println("\nPrograma finalizado.");
                     break;
                 default:
-                    System.out.println(
-                            "\nOpción no válida."
-                    );
+                    System.out.println("\nOpción no válida.");
             }
-        } while (opcion != 4);
+        } while (opcion != 5);
     }
 }
