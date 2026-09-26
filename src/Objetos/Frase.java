@@ -31,6 +31,9 @@ public class Frase {
         int opcion;
         do {
             menu.mostrarMenu();
+            try{
+
+
             opcion = scanner.nextInt();
             scanner.nextLine();
             switch (opcion) {
@@ -65,6 +68,11 @@ public class Frase {
                     break;
                 default:
                     System.out.println("\nOpción no válida.");
+            }
+            }catch (Exception e){
+                System.out.println("Error: mejor pon un numero");
+                scanner.nextLine();
+                opcion=0;
             }
         } while (opcion != 5);
     }

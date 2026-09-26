@@ -9,7 +9,16 @@ public class IngresoClase {
     }
 
     public String ingresarFrase() {
-        System.out.print("Ingresa una frase: ");
-        return scanner.nextLine();
+        try {
+            System.out.print("Ingresa una frase: ");
+            String frase= scanner.nextLine();
+            if(frase.trim().isEmpty()){
+                throw new IllegalArgumentException("No puede estar vacio");
+            }
+            return frase;
+        }catch (IllegalArgumentException e){
+            System.out.println("Error "+e.getMessage());
+            return "";
+        }
     }
 }
